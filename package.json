@@ -14,7 +14,9 @@
     "android": "rimraf .expo android & expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
-    "ts:check": "tsc"
+    "ts:check": "tsc",
+    "prepare": "husky install",
+    "commit:lint": "commitlint"
   },
   "dependencies": {
     "@expo-google-fonts/roboto": "^0.2.3",
@@ -50,6 +52,9 @@
     "prettier": "^3.0.3",
     "rimraf": "^5.0.1",
     "typescript": "^5.2.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --cache --fix"
   },
   "private": true
 }
