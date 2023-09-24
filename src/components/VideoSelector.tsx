@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import { Track } from 'react-native-track-player';
+import TrackPlayer, { Track } from 'react-native-track-player';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../colors';
 import { LogoIcon } from '../icons/LogoIcon';
@@ -21,15 +21,12 @@ export type YoutuveTrack = {
 };
 
 const VideoSelector: FC = () => {
-  const [podcasts, setPodcasts] = useState<Track[]>([]);
   const [step, setStep] = useState(1);
-  const [progress, setProgress] = useState(0);
-  const [cover, setCover] = useState<YoutubeInfoThumbnail>();
   const [tracks, setTracks] = useState<YoutuveTrack[]>([]);
 
   const handleLoadVideo = (url: string) => {
     setStep(2);
-    if (!podcasts.length && url) {
+    if (!tracks.length && url) {
       getInfo({ url }).then(video => {
         if (video) {
           const thumbnail = video.videoDetails.thumbnail.thumbnails.reduce(
@@ -51,7 +48,6 @@ const VideoSelector: FC = () => {
             );
           setTracks(audios);
           setStep(3);
-          console.log(audios[0].cover.url);
           // FileSystem.createDownloadResumable(
           //   audios[0].url as string,
           //   FileSystem.documentDirectory + 'small.mp4',
@@ -76,9 +72,13 @@ const VideoSelector: FC = () => {
   };
 
   const reset = () => {
-    setTracks([]);
-    setStep(1);
-  }
+    TrackPlayer.clearNowPlayingMetadata().then(() => {
+      TrackPlayer.reset().then(() => {
+        setTracks([]);
+        setStep(1);
+      });
+    });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -88,10 +88,7 @@ const VideoSelector: FC = () => {
       </View>
       {!!tracks.length && (
         <>
-          <TouchableOpacity
-            style={styles.backButton}
-            onPress={() => reset()}
-          >
+          <TouchableOpacity style={styles.backButton} onPress={() => reset()}>
             <Ionicons
               name="arrow-back-outline"
               size={24}

@@ -1,28 +1,28 @@
+import Slider from '@react-native-community/slider';
+import { Image } from 'expo-image';
 import React, { FC, useEffect, useState } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
   Dimensions,
-  TouchableOpacity,
   ImageSourcePropType,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 import TrackPlayer, {
   Capability,
-  State,
   Event,
+  State,
+  Track,
   usePlaybackState,
   useProgress,
   useTrackPlayerEvents,
-  Track,
 } from 'react-native-track-player';
-import { Image } from 'expo-image';
-import Slider from '@react-native-community/slider';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../colors';
-import { YoutuveTrack } from './VideoSelector';
 import { timeConversion } from '../utils/timeConversion';
+import { YoutuveTrack } from './VideoSelector';
 
 type MusicPlayerProps = {
   podcasts: YoutuveTrack[];
@@ -40,7 +40,6 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
 
   const setupPlayer = async () => {
     try {
-      await TrackPlayer.setupPlayer();
       await TrackPlayer.updateOptions({
         capabilities: [
           Capability.Play,
@@ -62,7 +61,6 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
       const track = await TrackPlayer.getTrack(event.nextTrack);
       if (!track) return;
       const { title, artwork, artist } = track;
-      console.log(event.nextTrack);
       setTrackIndex(event.nextTrack);
       setTrackTitle(title);
       setTrackArtist(artist);
@@ -74,7 +72,6 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
     let trackIndex = await TrackPlayer.getCurrentTrack();
     if (!trackIndex) return;
     let trackObject = await TrackPlayer.getTrack(trackIndex);
-    console.log({ trackIndex, trackObject });
     setTrackIndex(trackIndex);
     setTrackTitle(trackObject?.title);
     setTrackArtist(trackObject?.artist);
@@ -109,8 +106,6 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
   useEffect(() => {
     setupPlayer();
   }, []);
-
-  console.log({ progress });
 
   return (
     <SafeAreaView style={styles.container}>

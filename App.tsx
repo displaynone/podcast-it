@@ -1,18 +1,21 @@
-import { useFonts } from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import React, { useCallback } from 'react';
-import { StatusBar, StyleSheet, View } from 'react-native';
-import VideoSelector from './src/components/VideoSelector';
 import {
   Roboto_300Light,
   Roboto_400Regular,
   Roboto_500Medium,
   Roboto_900Black,
 } from '@expo-google-fonts/roboto';
+import { useFonts } from 'expo-font';
+import * as SplashScreen from 'expo-splash-screen';
+import React, { useCallback, useState } from 'react';
+import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
+import TrackPlayer from 'react-native-track-player';
+import VideoSelector from './src/components/VideoSelector';
+import { colors } from './src/colors';
 
 SplashScreen.preventAutoHideAsync();
 
 const App = () => {
+  const [isSetUp, setIsSetUp] = useState(false);
   const [fontsLoaded, fontError] = useFonts({
     Roboto_300Light,
     Roboto_400Regular,
@@ -22,7 +25,12 @@ const App = () => {
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
+      await SplashScreen.hideAsync().then(async () => {
+        if (!isSetUp) {
+          setIsSetUp(true);
+          await TrackPlayer.setupPlayer();
+        }
+      });
     }
   }, [fontsLoaded, fontError]);
 
@@ -31,10 +39,10 @@ const App = () => {
   }
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
+    <ScrollView style={styles.container} onLayout={onLayoutRootView}>
       <StatusBar barStyle="light-content" />
       <VideoSelector />
-    </View>
+    </ScrollView>
   );
 };
 
@@ -43,5 +51,7 @@ export default App;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    minHeight: '100%',
+    backgroundColor: colors.darkBlue,
   },
 });
