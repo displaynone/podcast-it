@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:JSON.parse("{\"3S9JH+\":\"h\",\"N3+Ksk\":\"Charger la vidéo\",\"VpKgSo\":\"Chargement des données vidéo...\",\"h/N3pl\":\"m\",\"YDYKth\":\"Podcast It\",\"B0/2ea\":\"s\",\"q5Ue9s\":\"Sélectionnez une autre chanson\",\"4DOCMI\":\"URL YouTube\"}")};

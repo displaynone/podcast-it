@@ -11,6 +11,7 @@ import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import VideoSelector from './src/components/VideoSelector';
 import { colors } from './src/colors';
+import LocalizationProvider from './src/providers/LocalizationProvider';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -41,7 +42,9 @@ const App = () => {
   return (
     <ScrollView style={styles.container} onLayout={onLayoutRootView}>
       <StatusBar barStyle="light-content" />
-      <VideoSelector />
+      <LocalizationProvider>
+        <VideoSelector />
+      </LocalizationProvider>
     </ScrollView>
   );
 };

@@ -1,3 +1,4 @@
+import { Trans } from '@lingui/macro';
 import { FC, useState } from 'react';
 import {
   SafeAreaView,
@@ -84,7 +85,9 @@ const VideoSelector: FC = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.logo}>
         <LogoIcon size={60} />
-        <Text style={styles.heading}>Podcast It</Text>
+        <Text style={styles.heading}>
+          <Trans>Podcast It</Trans>
+        </Text>
       </View>
       {!!tracks.length && (
         <>
@@ -94,7 +97,9 @@ const VideoSelector: FC = () => {
               size={24}
               color={colors.lightGray}
             />
-            <Text style={styles.default}>Select another song</Text>
+            <Text style={styles.default}>
+              <Trans>Select another song</Trans>
+            </Text>
           </TouchableOpacity>
           <MusicPlayer podcasts={tracks} />
         </>

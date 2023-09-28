@@ -32,5 +32,6 @@ module.exports = {
         projectId: process.env.EAS_PROJECT_ID,
       },
     },
+    plugins: ['expo-localization'],
   },
 };

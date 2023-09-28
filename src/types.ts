@@ -1,3 +1,6 @@
+import { ReactNode } from 'react';
+import { Locale as ExpoLocale } from 'expo-localization';
+
 export type YoutubeInfoThumbnail = {
   url: string;
   width: number;
@@ -109,4 +112,33 @@ export type YoutubeInfo = {
 export type IconProps = {
   size?: number;
   color?: string;
+};
+
+export const Locales = [
+  'en',
+  'es',
+  'fr',
+  'it',
+  'de',
+  'zh',
+  'ar',
+  'ko',
+  'ja',
+  'ur',
+  'pl',
+  'ca',
+  'gl',
+  'eu',
+  'pt',
+  'hi',
+] as const;
+export type Locale = (typeof Locales)[number];
+export type LocaleData = {
+  plurals: (n: number | string, ord?: boolean) => string;
+};
+
+export type TextDirection = ExpoLocale['textDirection'];
+
+export type ComponentWithChildren = {
+  children: ReactNode;
 };

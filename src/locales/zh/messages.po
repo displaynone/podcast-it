@@ -1,0 +1,46 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2023-09-25 01:29+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+#: src/utils/timeConversion.ts:9
+msgid "h"
+msgstr "时"
+
+#: src/components/VideoLoading.tsx:26
+msgid "Load video"
+msgstr "加载视频"
+
+#: src/components/VideoLoading.tsx:32
+msgid "Loading video data..."
+msgstr "加载视频数据..."
+
+#: src/utils/timeConversion.ts:16
+msgid "m"
+msgstr "分"
+
+#: src/components/VideoSelector.tsx:89
+msgid "Podcast It"
+msgstr "Podcast It"
+
+#: src/utils/timeConversion.ts:22
+msgid "s"
+msgstr "秒"
+
+#: src/components/VideoSelector.tsx:101
+msgid "Select another song"
+msgstr "选择另一首歌曲"
+
+#: src/components/VideoLoading.tsx:19
+msgid "YouTube URL"
+msgstr "YouTube 网址"

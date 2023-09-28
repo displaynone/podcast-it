@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { Button, Dimensions, StyleSheet, Text, TextInput } from 'react-native';
 import { colors } from '../colors';
 import { YoutubeInfoThumbnail } from '../types';
+import { Trans, t } from '@lingui/macro';
 
 type VideoLoadingProps = {
   step: number;
@@ -15,20 +16,26 @@ const VideoLoading: FC<VideoLoadingProps> = ({ step, handleLoadVideo }) => {
     <>
       {step === 1 && (
         <>
-          <Text style={styles.label}>YouTube URL</Text>
+          <Text style={styles.label}>
+            <Trans>YouTube URL</Trans>
+          </Text>
           <TextInput
             style={styles.input}
             value={url}
             onChangeText={text => setUrl(text)}
           />
           <Button
-            title="Load video"
+            title={t`Load video`}
             color={colors.orange}
             onPress={() => handleLoadVideo(url)}
           />
         </>
       )}
-      {step === 2 && <Text style={styles.default}>Loading video data...</Text>}
+      {step === 2 && (
+        <Text style={styles.default}>
+          <Trans>Loading video data...</Trans>
+        </Text>
+      )}
       {/* {step === 3 && (
         <>
           {cover && (

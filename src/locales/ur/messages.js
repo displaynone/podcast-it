@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:JSON.parse("{\"3S9JH+\":\"گھ\",\"N3+Ksk\":\"ویڈیو لوڈ کریں\",\"VpKgSo\":\"ویڈیو ڈیٹا لوڈ ہو رہا ہے...\",\"h/N3pl\":\"م\",\"YDYKth\":\"Podcast It\",\"B0/2ea\":\"س\",\"q5Ue9s\":\"دوسرا گانا منتخب کریں\",\"4DOCMI\":\"یوٹیوب یو آر ایل\"}")};
