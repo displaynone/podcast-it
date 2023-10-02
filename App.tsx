@@ -6,7 +6,7 @@ import {
 } from '@expo-google-fonts/roboto';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, StatusBar, StyleSheet, View } from 'react-native';
 import TrackPlayer from 'react-native-track-player';
 import VideoSelector from './src/components/VideoSelector';
@@ -24,6 +24,14 @@ const App = () => {
     Roboto_900Black,
   });
 
+  useEffect(() => {
+    return () => {
+      try {
+        TrackPlayer.reset();
+      } catch (e) {}
+    };
+  }, []);
+
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
       await SplashScreen.hideAsync().then(async () => {
@@ -33,7 +41,7 @@ const App = () => {
         }
       });
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, fontError, isSetUp]);
 
   if (!fontsLoaded && !fontError) {
     return null;
