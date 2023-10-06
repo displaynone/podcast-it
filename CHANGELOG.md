@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/displaynone/podcast-it/compare/v1.0.1...v1.1.0) (2023-10-02)
+
+
+### Features
+
+* removing remote player when closing app ([1cd3ab1](https://github.com/displaynone/podcast-it/commit/1cd3ab18cec274999880e358fed1b101eb976d98))
+
 ## 1.0.1 (2023-09-29)
 
 
