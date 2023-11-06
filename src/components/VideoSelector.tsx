@@ -16,19 +16,20 @@ import { YoutubeInfoThumbnail } from '../types';
 import MusicPlayer from './MusicPlayer';
 import VideoLoading from './VideoLoading';
 
-export type YoutuveTrack = {
+export type YoutubeTrack = {
   cover: YoutubeInfoThumbnail;
   track: Track;
+  id: string;
 };
 
 const VideoSelector: FC = () => {
   const [step, setStep] = useState(1);
-  const [tracks, setTracks] = useState<YoutuveTrack[]>([]);
+  const [tracks, setTracks] = useState<YoutubeTrack[]>([]);
 
   const handleLoadVideo = (url: string) => {
     setStep(2);
     if (!tracks.length && url) {
-      getInfo({ url }).then(video => {
+      getInfo({ url }).then(async video => {
         if (video) {
           const thumbnail = video.videoDetails.thumbnail.thumbnails.reduce(
             (prev, curr) => (prev.width > curr.width ? prev : curr),
@@ -45,7 +46,8 @@ const VideoSelector: FC = () => {
                     artwork: thumbnail.url,
                   },
                   cover: thumbnail,
-                }) as YoutuveTrack,
+                  id: video.videoDetails.videoId,
+                }) as YoutubeTrack,
             );
           setTracks(audios);
           setStep(3);
