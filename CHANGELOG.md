@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/displaynone/podcast-it/compare/v1.1.0...v1.2.0) (2023-11-06)
+
+
+### Features
+
+* saving song time position ([d4fa7e9](https://github.com/displaynone/podcast-it/commit/d4fa7e96827346cd2c522d1ec6a3a863dbb8c5f8))
+
 ## [1.1.0](https://github.com/displaynone/podcast-it/compare/v1.0.1...v1.1.0) (2023-10-02)
 
 
