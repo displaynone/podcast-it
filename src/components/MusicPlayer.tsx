@@ -1,6 +1,6 @@
 import Slider from '@react-native-community/slider';
 import { Image } from 'expo-image';
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import {
   Dimensions,
   ImageSourcePropType,
@@ -22,10 +22,11 @@ import TrackPlayer, {
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { colors } from '../colors';
 import { timeConversion } from '../utils/timeConversion';
-import { YoutuveTrack } from './VideoSelector';
+import { YoutubeTrack } from './VideoSelector';
+import * as SecureStore from 'expo-secure-store';
 
 type MusicPlayerProps = {
-  podcasts: YoutuveTrack[];
+  podcasts: YoutubeTrack[];
 };
 
 const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
@@ -38,7 +39,12 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
   const playBackState = usePlaybackState();
   const progress = useProgress();
 
-  const setupPlayer = async () => {
+  const getPreviousSeekTo = async (track: YoutubeTrack) => {
+    const seekTo = +((await SecureStore.getItemAsync(track.id)) ?? 0);
+    return seekTo;
+  };
+
+  const setupPlayer = useCallback(async () => {
     try {
       await TrackPlayer.updateOptions({
         capabilities: [
@@ -50,11 +56,13 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
       });
       await TrackPlayer.add(podcasts.map(podcast => podcast.track));
       await gettrackdata();
+      const seekTo = await getPreviousSeekTo(podcasts[0]);
+      await TrackPlayer.seekTo(seekTo);
       await TrackPlayer.play();
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [podcasts]);
 
   useTrackPlayerEvents([Event.PlaybackTrackChanged], async event => {
     if (event.type === Event.PlaybackTrackChanged && event.nextTrack !== null) {
@@ -105,7 +113,13 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
 
   useEffect(() => {
     setupPlayer();
-  }, []);
+  }, [setupPlayer]);
+
+  const onTrackSeekTo = async (value: number) => {
+    await TrackPlayer.seekTo(value);
+    console.log({ value });
+    await SecureStore.setItemAsync(podcasts[0].id, `${value}`);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -148,7 +162,7 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
             thumbTintColor={colors.yellow}
             minimumTrackTintColor={colors.yellow}
             maximumTrackTintColor={colors.white}
-            onSlidingComplete={async value => await TrackPlayer.seekTo(value)}
+            onSlidingComplete={onTrackSeekTo}
           />
           <View style={styles.progressLevelDuraiton}>
             <Text style={styles.progressLabelText}>

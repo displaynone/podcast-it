@@ -58,7 +58,9 @@ const buildDecoder = async (watchHtml: string) => {
 
   const decodeFunction = decodeFunctionMatches[0];
 
-  const varNameMatches = decodeFunction.match(/\.split\(\"\"\);([a-zA-Z0-9]+)\./);
+  const varNameMatches = decodeFunction.match(
+    /\.split\(\"\"\);([a-zA-Z0-9]+)\./,
+  );
 
   if (!varNameMatches) {
     return null;
@@ -74,7 +76,13 @@ const buildDecoder = async (watchHtml: string) => {
     return null;
   }
 
-  return function (signatureCipher: string | string[][] | Record<string, string> | URLSearchParams) {
+  return function (
+    signatureCipher:
+      | string
+      | string[][]
+      | Record<string, string>
+      | URLSearchParams,
+  ) {
     const params = new URLSearchParams(signatureCipher);
     const signature = params.get('s');
     const signatureParam = params.get('sp') || 'signature';
@@ -90,14 +98,14 @@ const buildDecoder = async (watchHtml: string) => {
 };
 
 type GetInfoParams = {
-  url: string,
+  url: string;
   throwOnError?: boolean;
-}
+};
 
 export const getInfo = async ({ url, throwOnError = false }: GetInfoParams) => {
   const videoId = getVideoId({ url });
 
-  console.log({videoId});
+  console.log({ videoId });
   if (!videoId) return false;
 
   const ytApi = 'https://www.youtube.com/watch';
@@ -108,7 +116,9 @@ export const getInfo = async ({ url, throwOnError = false }: GetInfoParams) => {
     });
 
     if (!response || response.status != 200 || !response.data) {
-      const error = new Error('Cannot get youtube video response: ' + JSON.stringify(response));
+      const error = new Error(
+        'Cannot get youtube video response: ' + JSON.stringify(response),
+      );
       throw error;
     }
 
@@ -120,13 +130,15 @@ export const getInfo = async ({ url, throwOnError = false }: GetInfoParams) => {
       streamingData.adaptiveFormats || [],
     );
 
-    const isEncryptedVideo = !!formats.find((it: { signatureCipher: any; }) => !!it.signatureCipher);
+    const isEncryptedVideo = !!formats.find(
+      (it: { signatureCipher: any }) => !!it.signatureCipher,
+    );
 
     if (isEncryptedVideo) {
       const decoder = await buildDecoder(response.data);
 
       if (decoder) {
-        formats = formats.map((it: { url: string; signatureCipher: any; }) => {
+        formats = formats.map((it: { url: string; signatureCipher: any }) => {
           if (it.url || !it.signatureCipher) {
             return it;
           }
@@ -140,7 +152,7 @@ export const getInfo = async ({ url, throwOnError = false }: GetInfoParams) => {
 
     const result: YoutubeInfo = {
       videoDetails: parsedResponse.videoDetails || {},
-      formats: formats.filter((format: { url: any; }) => format.url),
+      formats: formats.filter((format: { url: any }) => format.url),
     };
 
     if (result.videoDetails.isLiveContent) {
@@ -177,7 +189,7 @@ export const getInfo = async ({ url, throwOnError = false }: GetInfoParams) => {
 
 type GetVideoIdParams = {
   url: string;
-}
+};
 
 export const getVideoId = ({ url }: GetVideoIdParams) => {
   const opts = { fuzzy: true };
@@ -213,4 +225,3 @@ export const getVideoId = ({ url }: GetVideoIdParams) => {
 
   return null;
 };
-
