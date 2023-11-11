@@ -53,12 +53,16 @@ const MusicPlayer: FC<MusicPlayerProps> = ({ podcasts }) => {
           Capability.SkipToNext,
           Capability.SkipToPrevious,
         ],
+        progressUpdateEventInterval: 2,
       });
       await TrackPlayer.add(podcasts.map(podcast => podcast.track));
       await gettrackdata();
       const seekTo = await getPreviousSeekTo(podcasts[0]);
       await TrackPlayer.seekTo(seekTo);
       await TrackPlayer.play();
+      TrackPlayer.addEventListener(Event.PlaybackProgressUpdated, event => {
+        SecureStore.setItemAsync(podcasts[0].id, `${event.position}`);
+      });
     } catch (error) {
       console.log(error);
     }

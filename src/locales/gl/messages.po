@@ -17,11 +17,11 @@ msgstr ""
 msgid "h"
 msgstr "h"
 
-#: src/components/VideoLoading.tsx:26
+#: src/components/VideoLoading.tsx:27
 msgid "Load video"
 msgstr "Cargar vídeo"
 
-#: src/components/VideoLoading.tsx:32
+#: src/components/VideoLoading.tsx:35
 msgid "Loading video data..."
 msgstr "Cargando datos do vídeo..."
 
@@ -29,7 +29,7 @@ msgstr "Cargando datos do vídeo..."
 msgid "m"
 msgstr "m"
 
-#: src/components/VideoSelector.tsx:89
+#: src/components/VideoSelector.tsx:91
 msgid "Podcast It"
 msgstr "Podcast It"
 
@@ -37,7 +37,7 @@ msgstr "Podcast It"
 msgid "s"
 msgstr "s"
 
-#: src/components/VideoSelector.tsx:101
+#: src/components/VideoSelector.tsx:103
 msgid "Select another song"
 msgstr "Selecciona outra canción"
 
