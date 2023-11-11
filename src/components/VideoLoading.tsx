@@ -1,8 +1,7 @@
-import { FC, useState } from 'react';
-import { Button, Dimensions, StyleSheet, Text, TextInput } from 'react-native';
-import { colors } from '../colors';
-import { YoutubeInfoThumbnail } from '../types';
 import { Trans, t } from '@lingui/macro';
+import { FC, useState } from 'react';
+import { Button, StyleSheet, Text, TextInput } from 'react-native';
+import { colors } from '../colors';
 
 type VideoLoadingProps = {
   step: number;

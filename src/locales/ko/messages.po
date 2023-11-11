@@ -17,11 +17,11 @@ msgstr ""
 msgid "h"
 msgstr "시"
 
-#: src/components/VideoLoading.tsx:26
+#: src/components/VideoLoading.tsx:27
 msgid "Load video"
 msgstr "비디오 로드"
 
-#: src/components/VideoLoading.tsx:32
+#: src/components/VideoLoading.tsx:35
 msgid "Loading video data..."
 msgstr "비디오 데이터 로딩 중..."
 
@@ -29,7 +29,7 @@ msgstr "비디오 데이터 로딩 중..."
 msgid "m"
 msgstr "분"
 
-#: src/components/VideoSelector.tsx:89
+#: src/components/VideoSelector.tsx:91
 msgid "Podcast It"
 msgstr "Podcast It"
 
@@ -37,7 +37,7 @@ msgstr "Podcast It"
 msgid "s"
 msgstr "초"
 
-#: src/components/VideoSelector.tsx:101
+#: src/components/VideoSelector.tsx:103
 msgid "Select another song"
 msgstr "다른 노래 선택하기"
 
