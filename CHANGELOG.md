@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.1](https://github.com/displaynone/podcast-it/compare/v1.2.0...v1.2.1) (2023-11-11)
+
+
+### Bug Fixes
+
+* secure store saving audio position ([b0b3b77](https://github.com/displaynone/podcast-it/commit/b0b3b7760a589e435e2316f76ecc5a7145221f9e))
+
 ## [1.2.0](https://github.com/displaynone/podcast-it/compare/v1.1.0...v1.2.0) (2023-11-06)
 
 
