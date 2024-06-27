@@ -62,3 +62,33 @@ npm run android
 - Press the "Load video" button
 - Enjoy your podcast
 
+## Versión 2.0.0
+
+En esta versión, tuve que cambiar la forma en que se recuperaban los datos de los videos. Desde 2024, he tenido problemas con las URLs, y no sé por qué, pero si el proyecto estaba expulsado (`ejected`), las firmas de las URLs eran incorrectas. El mismo código funcionaba bien con Expo, pero al expulsar el proyecto, fallaba. Y necesitaba estar expulsado para poder usar `TrackPlayer`.
+
+Después de varias semanas intentando solucionar el problema, decidí implementar un servidor que proporcione la información necesaria. Utilicé el siguiente script para ello:
+
+```javascript
+const ytdl = require("ytdl-core");
+const express = require("express");
+const app = express();
+const port = 3001;
+
+app.use(express.json());
+
+app.post("/", (req, res) => {
+    console.log(req.body);
+    const videoId = ytdl.getURLVideoID(req.body.url);
+    console.log(videoId);
+    ytdl.getInfo(videoId).then((info) => {
+        let format = ytdl.chooseFormat(info.formats, { quality: "highestaudio" });
+        res.json(info);
+    });
+});
+
+app.listen(port, () => {
+    console.log(`Servidor escuchando en el puerto ${port}`);
+});
+```
+
+Solo necesitas configurar el servidor en la variable de entorno llamada `YOUTUBE_EXTERNAL_API`.
