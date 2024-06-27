@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.3.0](https://github.com/displaynone/podcast-it/compare/v1.2.0...v1.3.0) (2024-06-27)
+
+
+### Features
+
+* using external server for getting video info ([d730a1c](https://github.com/displaynone/podcast-it/commit/d730a1cd1ad9703eb033340735779dfbe0883e1e))
+
+
+### Bug Fixes
+
+* secure store saving audio position ([b0b3b77](https://github.com/displaynone/podcast-it/commit/b0b3b7760a589e435e2316f76ecc5a7145221f9e))
+
 ## [1.2.0](https://github.com/displaynone/podcast-it/compare/v1.1.0...v1.2.0) (2023-11-06)
 
 
